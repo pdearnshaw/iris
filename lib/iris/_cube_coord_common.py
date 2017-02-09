@@ -29,7 +29,7 @@ import iris.std_names
 
 
 class LimitedAttributeDict(dict):
-    _forbidden_keys = ('standard_name', 'long_name', 'units', 'bounds', 'axis',
+    _forbidden_keys = ('standard_name', 'long_name', 'units', 'bounds',
                        'calendar', 'leap_month', 'leap_year', 'month_lengths',
                        'coordinates', 'grid_mapping', 'climatology',
                        'cell_methods', 'formula_terms', 'compress',

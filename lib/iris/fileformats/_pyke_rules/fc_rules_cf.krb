@@ -1483,10 +1483,6 @@ fc_extras
         if not attr_units:
             attr_units = '1'
 
-        # Sanitise lat/lon units.
-        if attr_units in UD_UNITS_LAT or attr_units in UD_UNITS_LON:
-            attr_units = 'degrees'
-
         # Graceful loading of invalid units.
         try:
             cf_units.as_unit(attr_units)

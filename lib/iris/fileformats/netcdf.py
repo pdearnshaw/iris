@@ -81,8 +81,9 @@ SPATIO_TEMPORAL_AXES = ['t', 'z', 'y', 'x']
 #  - source
 #  - title
 #  - positive
+#  - axis
 #
-_CF_ATTRS = ['add_offset', 'ancillary_variables', 'axis', 'bounds', 'calendar',
+_CF_ATTRS = ['add_offset', 'ancillary_variables', 'bounds', 'calendar',
              'cell_measures', 'cell_methods', 'climatology', 'compress',
              'coordinates', '_FillValue', 'formula_terms', 'grid_mapping',
              'leap_month', 'leap_year', 'long_name', 'missing_value',
@@ -538,6 +539,7 @@ def _load_cube(engine, cf, cf_var, filename):
         return item[0] not in _CF_ATTRS
 
     for coord, cf_var_name in coordinates:
+        cf.cf_group[cf_var_name].cf_attrs_reset()
         tmpvar = filter(attribute_predicate,
                         cf.cf_group[cf_var_name].cf_attrs_unused())
         for attr_name, attr_value in tmpvar:

@@ -300,17 +300,22 @@ def guess_coord_axis(coord):
     """
     axis = None
 
-    if coord.standard_name in ('longitude', 'grid_longitude',
-                               'projection_x_coordinate'):
-        axis = 'X'
-    elif coord.standard_name in ('latitude', 'grid_latitude',
-                                 'projection_y_coordinate'):
-        axis = 'Y'
-    elif (coord.units.is_convertible('hPa') or
-          coord.attributes.get('positive') in ('up', 'down')):
-        axis = 'Z'
-    elif coord.units.is_time_reference():
-        axis = 'T'
+    if 'axis' in coord.attributes:
+        axis = coord.attributes['axis']
+
+    else:
+
+        if coord.standard_name in ('longitude', 'grid_longitude',
+                                   'projection_x_coordinate'):
+            axis = 'X'
+        elif coord.standard_name in ('latitude', 'grid_latitude',
+                                     'projection_y_coordinate'):
+            axis = 'Y'
+        elif (coord.units.is_convertible('hPa') or
+              coord.attributes.get('positive') in ('up', 'down')):
+            axis = 'Z'
+        elif coord.units.is_time_reference():
+            axis = 'T'
 
     return axis
 
